@@ -1,0 +1,55 @@
+package application;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import db.DB;
+import db.DbException;
+
+public class Program {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Connection conn = null;
+		Statement st = null;
+
+		try {
+			conn = DB.getConnection(); // conectando com o banco de dados
+			st = conn.createStatement();
+			
+			conn.setAutoCommit(false); // não é para confirmar as operações automaticamente sem sinal do programador
+			
+			int rows1 = st.executeUpdate("UPDATE seller SET BaseSalary = 2090 WHERE DepartmentId = 1"); // primeiro update
+			
+			// simulando um erro
+			int x = 1;
+			if (x < 2) {
+				throw new SQLException("Fake error!");
+			}
+			
+			int rows2 = st.executeUpdate("UPDATE seller SET BaseSalary = 3090 WHERE DepartmentId = 2"); // segundo update depois do erro
+			
+			conn.commit(); // confirmando a operação
+			
+			System.out.println("Rows1 affected: " + rows1);
+			System.out.println("Rows2 affected: " + rows2);
+
+		} catch (SQLException e) {
+			try {
+				conn.rollback(); // ele volta a execução do banco de dados
+				throw new DbException("Transaction rolled back! Caused by: " + e1.getMessage());
+				
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				throw new DbException("Error trying to rollback! Caused by: " + e1.getMessage())
+			}
+
+		} finally {
+			DB.closeStatement(st);
+			DB.closeConnection();
+		}
+	}
+
+}

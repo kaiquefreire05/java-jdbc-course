@@ -1,0 +1,5 @@
+INDEX VERSION 1.134+C:\Users\kaiqu\OneDrive\Documentos\ws-eclipse-two\.metadata\.plugins\org.eclipse.jdt.core
+4269311390.index
+1696264553.index
+1865797976.index
+439233059.index

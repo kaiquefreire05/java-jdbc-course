@@ -1,0 +1,31 @@
+package application;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import db.DB;
+import db.DbException;
+
+public class Program {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Connection conn  = null;
+		PreparedStatement st = null;
+		
+		try {
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+			
+		} finally { 
+			DB.closeStatement(st);
+			DB.closeConnection();
+		}
+	}
+
+}
